@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3Access", "S3Access\S3Access.csproj", "{4E1108A8-4EC1-45B1-AEC5-917449489B9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3Web", "S3Web\S3Web.csproj", "{B9BAACA8-02F9-435E-9CB9-4A9456BEB0CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4E1108A8-4EC1-45B1-AEC5-917449489B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E1108A8-4EC1-45B1-AEC5-917449489B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E1108A8-4EC1-45B1-AEC5-917449489B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9BAACA8-02F9-435E-9CB9-4A9456BEB0CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BAACA8-02F9-435E-9CB9-4A9456BEB0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BAACA8-02F9-435E-9CB9-4A9456BEB0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BAACA8-02F9-435E-9CB9-4A9456BEB0CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

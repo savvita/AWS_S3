@@ -11,28 +11,52 @@ namespace S3Access
             s3Client = new AmazonS3Client(accessKey, secretKey, region);
         }
 
-        public async Task<bool> DownloadFromBucketAsync(string bucketName, string objectName, string filePath)
+        public async Task<byte[]> DownloadFromBucketAsync(string bucketName, string objectName)
         {
-            var request = new GetObjectRequest
-            {
-                BucketName = bucketName,
-                Key = objectName
-            };
-
-            using GetObjectResponse response = await s3Client.GetObjectAsync(request);
-
             try
             {
-                await response.WriteResponseStreamToFileAsync($"{filePath}\\{objectName}", true, CancellationToken.None);
-                return true;
+                MemoryStream ms = null;
+                var request = new GetObjectRequest
+                {
+                    BucketName = bucketName,
+                    Key = objectName
+                };
+
+                using GetObjectResponse response = await s3Client.GetObjectAsync(request);
+
+                if(response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    using (ms = new MemoryStream())
+                    {
+                        await response.ResponseStream.CopyToAsync(ms);
+                    }
+                }
+
+                if(ms == null)
+                {
+                    throw new FileNotFoundException();
+                }
+
+                return ms.ToArray();
+
             }
-            catch (AmazonS3Exception)
+            catch (Exception)
             {
-                return false;
+
+                throw;
             }
+            //try
+            //{
+            //    await response.WriteResponseStreamToFileAsync($"{filePath}\\{objectName}", true, CancellationToken.None);
+            //    return true;
+            //}
+            //catch (AmazonS3Exception)
+            //{
+            //    return false;
+            //}
         }
 
-        public async Task<bool> UploadToBucketAsync(string bucketName, string objectName, byte[] bytes)
+        public async Task<bool> UploadToBucketAsync(string bucketName, string objectName, Stream stream)
         {
             try
             {
@@ -40,7 +64,7 @@ namespace S3Access
                 {
                     BucketName = bucketName,
                     Key = objectName,
-                    InputStream = new MemoryStream(bytes)
+                    InputStream = stream
                 };
 
                 var response = await s3Client.PutObjectAsync(request);
