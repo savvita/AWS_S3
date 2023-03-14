@@ -45,15 +45,6 @@ namespace S3Access
 
                 throw;
             }
-            //try
-            //{
-            //    await response.WriteResponseStreamToFileAsync($"{filePath}\\{objectName}", true, CancellationToken.None);
-            //    return true;
-            //}
-            //catch (AmazonS3Exception)
-            //{
-            //    return false;
-            //}
         }
 
         public async Task<bool> UploadToBucketAsync(string bucketName, string objectName, Stream stream)
@@ -87,7 +78,7 @@ namespace S3Access
             try
             {
                 var response = await s3Client.DeleteObjectAsync(request);
-                return response.HttpStatusCode == System.Net.HttpStatusCode.OK;
+                return true;
             }
             catch
             {

@@ -17,13 +17,6 @@ namespace S3Web.Controllers
             _access = new S3Access.S3Access(configuration["S3:AccessKey"], configuration["S3:SecretKey"], Amazon.RegionEndpoint.EUNorth1);
         }
 
-        //[HttpGet("")]
-        //public async Task<IActionResult> Get([FromQuery]string bucketName)
-        //{
-        //    var res = await _access.ListBucketContentAsync(bucketName);
-        //    return Ok(res);
-        //}
-
         [HttpGet("")]
         public async Task<IActionResult> Get([FromQuery]string? objectName)
         {
@@ -50,7 +43,7 @@ namespace S3Web.Controllers
 
 
         [HttpPost("")]
-        public async Task<IActionResult> Upload(IFormFile upload)
+        public async Task<IActionResult> Upload(IFormFileCollection upload)
         {
             if(Request.Form.Files.Count == 0)
             {
