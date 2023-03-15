@@ -11,10 +11,10 @@ namespace S3Web.Controllers
     public class S3Controller : ControllerBase
     {
         private readonly S3Access.S3Access _access;
-        private readonly string _bucketName = "watchshopbucket";
+        private readonly string _bucketName = "rekognitionimagesbucket";
         public S3Controller(IConfiguration configuration)
         {
-            _access = new S3Access.S3Access(configuration["S3:AccessKey"], configuration["S3:SecretKey"], Amazon.RegionEndpoint.EUNorth1);
+            _access = new S3Access.S3Access(configuration["S3:AccessKey"], configuration["S3:SecretKey"], Amazon.RegionEndpoint.EUWest2);
         }
 
         [HttpGet("")]
